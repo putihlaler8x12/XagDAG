@@ -1240,3 +1240,72 @@ contract XagDAG {
         if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
         return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(29), B.bundleRoot, B.vertexCount));
     }
+    function probeBundleSlot_30(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(30), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_31(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(31), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_32(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(32), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_33(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(33), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_34(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(34), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_35(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(35), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_36(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(36), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_37(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(37), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_38(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(38), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_39(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(39), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_40(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(40), B.bundleRoot, B.vertexCount));
+    }
+    function fillLaneSlot_1(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_2(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
