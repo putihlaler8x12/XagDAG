@@ -274,3 +274,72 @@ contract XagDAG {
             filled: 0,
             frozen: false
         });
+        emit LaneOpened(laneId, laneRoot, opensAt, closesAt, quota);
+    }
+
+    function setLaneFrozen(bytes32 laneId, bool frozen) external onlyDirector {
+        Lane storage L = _requireLane(laneId);
+        L.frozen = frozen;
+        emit LaneFrozen(laneId, frozen, msg.sender);
+    }
+
+    function tagLaneOperator(bytes32 laneId, address operator, bool enabled) external onlyDirector {
+        _requireLane(laneId);
+        _laneOperators[laneId][operator] = enabled;
+        emit OperatorTagged(laneId, operator, enabled);
+    }
+
+    function routeProof(bytes32 bundleId, bytes32 routeId, bytes32 proofHash) external whenUnfrozen {
+        if (routeId == bytes32(0) || proofHash == bytes32(0)) revert XDG_IdZero();
+        DagBundle storage B = _requireBundle(bundleId);
+        if (!B.locked || B.finalized) revert XDG_BundleLocked(bundleId);
+        if (_routes[bundleId][routeId].routedAt != 0) revert XDG_RouteExists(bundleId, routeId);
+
+        uint64 nowTs = uint64(block.timestamp);
+        uint64 untilTs = _operatorCooldown[msg.sender];
+        if (nowTs < untilTs) revert XDG_CooldownActive(msg.sender, untilTs);
+
+        _routes[bundleId][routeId] = RouteProof({
+            proofHash: proofHash,
+            operator: msg.sender,
+            routedAt: nowTs,
+            accepted: false
+        });
+        _operatorCooldown[msg.sender] = nowTs + ROUTE_COOLDOWN;
+        emit Routed(bundleId, routeId, msg.sender, proofHash);
+    }
+
+    function acceptRoute(bytes32 bundleId, bytes32 routeId) external onlyDirector whenUnfrozen {
+        RouteProof storage R = _routes[bundleId][routeId];
+        if (R.routedAt == 0) revert XDG_RouteUnknown(bundleId, routeId);
+        if (R.accepted) revert XDG_RouteExists(bundleId, routeId);
+        R.accepted = true;
+        emit RouteAccepted(bundleId, routeId, msg.sender);
+    }
+
+    function reclaimSurplus(address payable to) external onlyDirector {
+        if (to == address(0)) revert XDG_InvalidSuccessor(to);
+        uint256 bal = address(this).balance;
+        if (bal == 0) revert XDG_SurplusZero();
+        (bool ok,) = to.call{value: bal}("");
+        require(ok);
+    }
+
+    function bundleDigest(bytes32 bundleId) public view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(
+            abi.encode(
+                XDG_DOMAIN,
+                XDG_MIXER,
+                bundleId,
+                B.bundleRoot,
+                B.vertexCount,
+                B.edgeCount,
+                B.locked,
+                B.finalized,
+                genesisBlock,
+                epochSerial,
+                bundleSerial,
+                director,
+                ADDRESS_A,
