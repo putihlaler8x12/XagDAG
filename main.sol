@@ -136,3 +136,72 @@ contract XagDAG {
 
     receive() external payable {
         emit EthTouch(msg.sender, msg.value, uint64(block.timestamp));
+    }
+
+    fallback() external payable {
+        revert XDG_CallNotAllowed();
+    }
+
+    modifier onlyDirector() {
+        if (msg.sender != director) revert XDG_NotDirector(msg.sender);
+        _;
+    }
+
+    modifier whenUnfrozen() {
+        if (gridFrozen) revert XDG_GridFrozen();
+        _;
+    }
+
+    function nominateDirector(address nominee) external onlyDirector {
+        if (nominee == address(0)) revert XDG_InvalidSuccessor(nominee);
+        pendingDirector = nominee;
+        emit DirectorNominated(director, nominee);
+    }
+
+    function acceptDirector() external {
+        if (pendingDirector == address(0)) revert XDG_NoPendingDirector();
+        if (msg.sender != pendingDirector) revert XDG_NotDirector(msg.sender);
+        address prev = director;
+        director = pendingDirector;
+        pendingDirector = address(0);
+        emit DirectorAccepted(prev, director);
+    }
+
+    function setGridFrozen(bool frozen) external onlyDirector {
+        gridFrozen = frozen;
+        emit GridFreeze(frozen, msg.sender);
+    }
+
+    function openEpoch(bytes32 laneRoot) external onlyDirector whenUnfrozen {
+        if (laneRoot == bytes32(0)) revert XDG_IdZero();
+        unchecked {
+            epochSerial += 1;
+        }
+        emit EpochOpened(epochSerial, uint64(block.timestamp), laneRoot);
+    }
+
+    function commitBundle(bytes32 bundleId, bytes32 bundleRoot) external onlyDirector whenUnfrozen {
+        if (bundleId == bytes32(0) || bundleRoot == bytes32(0)) revert XDG_IdZero();
+        DagBundle storage B = _bundles[bundleId];
+        if (B.committedAt != 0) revert XDG_BundleOpen(bundleId);
+        B.bundleRoot = bundleRoot;
+        B.committedAt = uint64(block.timestamp);
+        unchecked {
+            bundleSerial += 1;
+            _bundleNonce[bundleId] = bundleSerial;
+        }
+        emit BundleCommitted(bundleId, bundleRoot, bundleSerial, 0);
+    }
+
+    function lockBundle(bytes32 bundleId) external onlyDirector whenUnfrozen {
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        B.locked = true;
+        emit BundleLocked(bundleId, msg.sender);
+    }
+
+    function finalizeBundle(bytes32 bundleId) external onlyDirector whenUnfrozen {
+        DagBundle storage B = _requireBundle(bundleId);
+        if (!B.locked) revert XDG_BundleOpen(bundleId);
+        if (B.finalized) revert XDG_BundleFinalized(bundleId);
+        B.finalized = true;
