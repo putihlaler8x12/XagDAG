@@ -481,3 +481,72 @@ contract XagDAG {
     }
     function batchPlaceVertices_3(
         bytes32 bundleId,
+        bytes32[3] calldata vertexIds,
+        bytes32[3] calldata modelRefs,
+        bytes32[3] calldata inputSchemas,
+        uint32[3] calldata gasHints,
+        uint16[3] calldata depths
+    ) external onlyDirector whenUnfrozen {
+        if (3 > MAX_BATCH_SIZE) revert XDG_BatchTooLarge(3);
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        for (uint256 i; i < 3; ++i) {
+            bytes32 vertexId = vertexIds[i];
+            if (vertexId == bytes32(0)) revert XDG_IdZero();
+            if (depths[i] > MAX_DAG_DEPTH) revert XDG_DepthExceeded(depths[i], MAX_DAG_DEPTH);
+            if (B.vertexCount >= MAX_VERTEX_COUNT) revert XDG_VertexCap(B.vertexCount, MAX_VERTEX_COUNT);
+            if (_vertices[bundleId][vertexId].modelRef != bytes32(0)) revert XDG_BundleOpen(bundleId);
+            _vertices[bundleId][vertexId] = Vertex({
+                modelRef: modelRefs[i],
+                inputSchema: inputSchemas[i],
+                gasHint: gasHints[i],
+                depth: depths[i],
+                sealed: false
+            });
+            unchecked { B.vertexCount += 1; }
+            emit VertexPlaced(bundleId, vertexId, modelRefs[i], depths[i]);
+        }
+    }
+    function batchPlaceVertices_4(
+        bytes32 bundleId,
+        bytes32[4] calldata vertexIds,
+        bytes32[4] calldata modelRefs,
+        bytes32[4] calldata inputSchemas,
+        uint32[4] calldata gasHints,
+        uint16[4] calldata depths
+    ) external onlyDirector whenUnfrozen {
+        if (4 > MAX_BATCH_SIZE) revert XDG_BatchTooLarge(4);
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        for (uint256 i; i < 4; ++i) {
+            bytes32 vertexId = vertexIds[i];
+            if (vertexId == bytes32(0)) revert XDG_IdZero();
+            if (depths[i] > MAX_DAG_DEPTH) revert XDG_DepthExceeded(depths[i], MAX_DAG_DEPTH);
+            if (B.vertexCount >= MAX_VERTEX_COUNT) revert XDG_VertexCap(B.vertexCount, MAX_VERTEX_COUNT);
+            if (_vertices[bundleId][vertexId].modelRef != bytes32(0)) revert XDG_BundleOpen(bundleId);
+            _vertices[bundleId][vertexId] = Vertex({
+                modelRef: modelRefs[i],
+                inputSchema: inputSchemas[i],
+                gasHint: gasHints[i],
+                depth: depths[i],
+                sealed: false
+            });
+            unchecked { B.vertexCount += 1; }
+            emit VertexPlaced(bundleId, vertexId, modelRefs[i], depths[i]);
+        }
+    }
+    function batchPlaceVertices_5(
+        bytes32 bundleId,
+        bytes32[5] calldata vertexIds,
+        bytes32[5] calldata modelRefs,
+        bytes32[5] calldata inputSchemas,
+        uint32[5] calldata gasHints,
+        uint16[5] calldata depths
+    ) external onlyDirector whenUnfrozen {
+        if (5 > MAX_BATCH_SIZE) revert XDG_BatchTooLarge(5);
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        for (uint256 i; i < 5; ++i) {
+            bytes32 vertexId = vertexIds[i];
+            if (vertexId == bytes32(0)) revert XDG_IdZero();
+            if (depths[i] > MAX_DAG_DEPTH) revert XDG_DepthExceeded(depths[i], MAX_DAG_DEPTH);
