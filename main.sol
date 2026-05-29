@@ -343,3 +343,72 @@ contract XagDAG {
                 bundleSerial,
                 director,
                 ADDRESS_A,
+                ADDRESS_B,
+                ADDRESS_C,
+                XDG_BUILD_TAG,
+                XDG_BUILD_STAMP
+            )
+        );
+    }
+
+    function bundleView(bytes32 bundleId)
+        external
+        view
+        returns (bytes32 bundleRoot, uint64 committedAt, uint16 vertexCount, uint16 edgeCount, bool locked, bool finalized)
+    {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return (B.bundleRoot, B.committedAt, B.vertexCount, B.edgeCount, B.locked, B.finalized);
+    }
+
+    function vertexView(bytes32 bundleId, bytes32 vertexId)
+        external
+        view
+        returns (bytes32 modelRef, bytes32 inputSchema, uint32 gasHint, uint16 depth, bool sealed)
+    {
+        Vertex memory V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        return (V.modelRef, V.inputSchema, V.gasHint, V.depth, V.sealed);
+    }
+
+    function edgeView(bytes32 bundleId, bytes32 edgeId)
+        external
+        view
+        returns (bytes32 fromVertex, bytes32 toVertex, uint8 port)
+    {
+        Edge memory E = _edges[bundleId][edgeId];
+        if (E.fromVertex == bytes32(0)) revert XDG_EdgeUnknown(bundleId, edgeId);
+        return (E.fromVertex, E.toVertex, E.port);
+    }
+
+    function laneView(bytes32 laneId)
+        external
+        view
+        returns (bytes32 laneRoot, uint64 opensAt, uint64 closesAt, uint16 quota, uint16 filled, bool frozen)
+    {
+        Lane memory L = _lanes[laneId];
+        if (L.opensAt == 0) revert XDG_LaneUnknown(laneId);
+        return (L.laneRoot, L.opensAt, L.closesAt, L.quota, L.filled, L.frozen);
+    }
+
+    function routeView(bytes32 bundleId, bytes32 routeId)
+        external
+        view
+        returns (bytes32 proofHash, address operator, uint64 routedAt, bool accepted)
+    {
+        RouteProof memory R = _routes[bundleId][routeId];
+        if (R.routedAt == 0) revert XDG_RouteUnknown(bundleId, routeId);
+        return (R.proofHash, R.operator, R.routedAt, R.accepted);
+    }
+
+    function isLaneOperator(bytes32 laneId, address operator) external view returns (bool) {
+        return _laneOperators[laneId][operator];
+    }
+
+    function operatorCooldown(address operator) external view returns (uint64) {
+        return _operatorCooldown[operator];
+    }
+
+    function bundleNonce(bytes32 bundleId) external view returns (uint256) {
+        return _bundleNonce[bundleId];
+    }
