@@ -1516,3 +1516,72 @@ contract XagDAG {
         if (L.frozen) revert XDG_LaneClosed(laneId);
         if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
         if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_29(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_30(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function sealVertex_1(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_2(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_3(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_4(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_5(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_6(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_7(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_8(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_9(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_10(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
