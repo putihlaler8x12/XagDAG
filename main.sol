@@ -1585,3 +1585,54 @@ contract XagDAG {
         if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
         V.sealed = true;
     }
+    function sealVertex_11(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_12(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_13(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_14(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_15(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_16(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_17(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_18(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_19(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+    function sealVertex_20(bytes32 bundleId, bytes32 vertexId) external onlyDirector whenUnfrozen {
+        Vertex storage V = _vertices[bundleId][vertexId];
+        if (V.modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, vertexId);
+        V.sealed = true;
+    }
+}
