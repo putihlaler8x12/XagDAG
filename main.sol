@@ -1447,3 +1447,72 @@ contract XagDAG {
         if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
         unchecked { L.filled += 1; }
     }
+    function fillLaneSlot_20(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_21(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_22(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_23(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_24(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_25(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_26(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_27(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_28(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
