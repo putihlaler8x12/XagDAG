@@ -205,3 +205,72 @@ contract XagDAG {
         if (!B.locked) revert XDG_BundleOpen(bundleId);
         if (B.finalized) revert XDG_BundleFinalized(bundleId);
         B.finalized = true;
+        emit BundleFinalized(bundleId, bundleDigest(bundleId), msg.sender);
+    }
+
+    function placeVertex(
+        bytes32 bundleId,
+        bytes32 vertexId,
+        bytes32 modelRef,
+        bytes32 inputSchema,
+        uint32 gasHint,
+        uint16 depth
+    ) external onlyDirector whenUnfrozen {
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        if (vertexId == bytes32(0) || modelRef == bytes32(0)) revert XDG_IdZero();
+        if (depth > MAX_DAG_DEPTH) revert XDG_DepthExceeded(depth, MAX_DAG_DEPTH);
+        if (B.vertexCount >= MAX_VERTEX_COUNT) revert XDG_VertexCap(B.vertexCount, MAX_VERTEX_COUNT);
+        if (_vertices[bundleId][vertexId].modelRef != bytes32(0)) revert XDG_BundleOpen(bundleId);
+
+        _vertices[bundleId][vertexId] = Vertex({
+            modelRef: modelRef,
+            inputSchema: inputSchema,
+            gasHint: gasHint,
+            depth: depth,
+            sealed: false
+        });
+        unchecked {
+            B.vertexCount += 1;
+        }
+        emit VertexPlaced(bundleId, vertexId, modelRef, depth);
+    }
+
+    function wireEdge(
+        bytes32 bundleId,
+        bytes32 edgeId,
+        bytes32 fromVertex,
+        bytes32 toVertex,
+        uint8 port
+    ) external onlyDirector whenUnfrozen {
+        DagBundle storage B = _requireBundle(bundleId);
+        if (B.locked) revert XDG_BundleLocked(bundleId);
+        if (edgeId == bytes32(0) || fromVertex == bytes32(0) || toVertex == bytes32(0)) revert XDG_IdZero();
+        if (_edges[bundleId][edgeId].fromVertex != bytes32(0)) revert XDG_EdgeExists(bundleId, edgeId);
+        if (_vertices[bundleId][fromVertex].modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, fromVertex);
+        if (_vertices[bundleId][toVertex].modelRef == bytes32(0)) revert XDG_VertexMissing(bundleId, toVertex);
+        if (fromVertex == toVertex) revert XDG_CycleRisk(fromVertex, toVertex);
+
+        _edges[bundleId][edgeId] = Edge({fromVertex: fromVertex, toVertex: toVertex, port: port});
+        unchecked {
+            B.edgeCount += 1;
+        }
+        emit EdgeWired(bundleId, edgeId, fromVertex, toVertex, port);
+    }
+
+    function openLane(bytes32 laneId, bytes32 laneRoot, uint64 ttlSec, uint16 quota) external onlyDirector whenUnfrozen {
+        if (laneId == bytes32(0) || laneRoot == bytes32(0)) revert XDG_IdZero();
+        if (ttlSec == 0 || ttlSec > MAX_TTL_SEC) revert XDG_TtlOutOfRange(ttlSec);
+        if (quota == 0 || quota > LANE_QUOTA_CAP) revert XDG_LaneQuota(laneId);
+        if (_lanes[laneId].opensAt != 0) revert XDG_BundleOpen(laneId);
+
+        uint64 opensAt = uint64(block.timestamp);
+        uint64 closesAt = opensAt + ttlSec;
+        _lanes[laneId] = Lane({
+            laneRoot: laneRoot,
+            opensAt: opensAt,
+            closesAt: closesAt,
+            quota: quota,
+            filled: 0,
+            frozen: false
+        });
