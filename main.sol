@@ -1171,3 +1171,72 @@ contract XagDAG {
         return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(15), B.bundleRoot, B.vertexCount));
     }
     function probeBundleSlot_16(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(16), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_17(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(17), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_18(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(18), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_19(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(19), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_20(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(20), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_21(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(21), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_22(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(22), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_23(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(23), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_24(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(24), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_25(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(25), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_26(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(26), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_27(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(27), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_28(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(28), B.bundleRoot, B.vertexCount));
+    }
+    function probeBundleSlot_29(bytes32 bundleId, bytes32 salt) external view returns (bytes32) {
+        DagBundle memory B = _bundles[bundleId];
+        if (B.committedAt == 0) revert XDG_BundleUnknown(bundleId);
+        return keccak256(abi.encode(XDG_DOMAIN, bundleId, salt, uint256(29), B.bundleRoot, B.vertexCount));
+    }
