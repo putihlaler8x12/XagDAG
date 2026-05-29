@@ -1378,3 +1378,72 @@ contract XagDAG {
     function fillLaneSlot_11(bytes32 laneId) external whenUnfrozen {
         Lane storage L = _requireLane(laneId);
         if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_12(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_13(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_14(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_15(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_16(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_17(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_18(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
+    function fillLaneSlot_19(bytes32 laneId) external whenUnfrozen {
+        Lane storage L = _requireLane(laneId);
+        if (L.frozen) revert XDG_LaneClosed(laneId);
+        if (block.timestamp > L.closesAt) revert XDG_LaneClosed(laneId);
+        if (!_laneOperators[laneId][msg.sender]) revert XDG_NotLaneOperator(laneId, msg.sender);
+        if (L.filled >= L.quota) revert XDG_LaneQuota(laneId);
+        unchecked { L.filled += 1; }
+    }
